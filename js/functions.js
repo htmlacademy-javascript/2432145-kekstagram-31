@@ -4,15 +4,13 @@
 -result: если длина приходящей строки меньше или совпадает c length - приходит true, иначе false. */
 
 function compareLength(string, length) {
-  if (string.length - 1 <= length) {
-    return true;
-  }
-  return false;
+  return string.length - 1 <= length;
 }
 
-compareLength('проверяемая строка', 20);
-compareLength('проверяемая строка', 18);
-compareLength('проверяемая строка', 10);
+
+console.log(compareLength('проверяемая строка', 20));
+console.log(compareLength('проверяемая строка', 18));
+console.log(compareLength('проверяемая строка', 10));
 
 /* 2. Функция для проверки является-ли строка палиндромом:
 - Вывод: если да - true, иначе false.
@@ -32,7 +30,7 @@ isPalindrome('ДовОд');
 isPalindrome('Кекс');
 isPalindrome('Лёша на полке клопа нашёл ');
 
-/* 3. Функция, извлекающая цифры от 0 до 9 из строки и, возвращающая их в виде целого положительного числа.
+/* 3. Функция, извлекающая цифры от 0 до 9 из строки и возвращающая их в виде целого положительного числа.
 Если в строке нет чисел - возвращается NaN;  */
 
 function getNumber(string) {
