@@ -8,9 +8,9 @@ function compareLength(string, length) {
 }
 
 
-console.log(compareLength('проверяемая строка', 20));
-console.log(compareLength('проверяемая строка', 18));
-console.log(compareLength('проверяемая строка', 10));
+compareLength('проверяемая строка', 20);
+compareLength('проверяемая строка', 18);
+compareLength('проверяемая строка', 10);
 
 /* 2. Функция для проверки является-ли строка палиндромом:
 - Вывод: если да - true, иначе false.
