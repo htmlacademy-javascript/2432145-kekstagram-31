@@ -1,14 +1,12 @@
 //Необходимо создать следующие функции для ДЗ module2-task1:
 /* 1. Функция для проверки длины строки:
--stringные данные: строка для проверки и длина строки для проверки.
+-выходныен данные: строка для проверки и длина строки для проверки.
 -result: если длина приходящей строки меньше или совпадает c length - приходит true, иначе false. */
 
-function compareLength(string, length) {
-  if (string.length - 1 <= length) {
-    return true;
-  }
-  return false;
+function compareLength(input, length) {
+  return input.length <= length;
 }
+
 
 compareLength('проверяемая строка', 20);
 compareLength('проверяемая строка', 18);
@@ -18,11 +16,11 @@ compareLength('проверяемая строка', 10);
 - Вывод: если да - true, иначе false.
 - Функция учитывает регистр и не учитывает пробелы. */
 
-function isPalindrome(string) {
-  const normalizeString = string.replaceAll(' ', '').toUpperCase();
+function isPalindrome(input) {
+  const normalizeString = input.replaceAll(' ', '').toUpperCase();
   let palindromeString = '';
   for (let i = normalizeString.length - 1; i >= 0; i--) {
-    palindromeString += normalizeString.at(i);
+    palindromeString += normalizeString[i];
   }
   return palindromeString === normalizeString;
 }
@@ -32,22 +30,19 @@ isPalindrome('ДовОд');
 isPalindrome('Кекс');
 isPalindrome('Лёша на полке клопа нашёл ');
 
-/* 3. Функция, извлекающая цифры от 0 до 9 из строки и, возвращающая их в виде целого положительного числа.
+/* 3. Функция, извлекающая цифры от 0 до 9 из строки и возвращающая их в виде целого положительного числа.
 Если в строке нет чисел - возвращается NaN;  */
 
-function getNumber(string) {
-  if (typeof string === 'number') {
-    string = string.toString();
-  }
+function getNumber(input) {
+  const str = input.toString();
   let result = '';
-  for (let i = 0; i < string.length; i++) {
-    const char = string[i];
-    const number = parseInt(char, 10);
-    if (!Number.isNaN(number)) {
-      result += number;
+  for (let i = 0; i < input.length; i++) {
+    const digit = parseInt(str[i],10);
+    if (!Number.isNaN(digit)) {
+      result += digit;
     }
   }
-  return result === '' ? NaN : parseInt(result, 10);
+  return result ? parseInt(result, 10) : NaN;
 }
 
 getNumber('2023 год');
