@@ -40,5 +40,5 @@ const getPhotoDescription = () => (
   }
 );
 
-console.table(getPhotoDescription());
+getPhotoDescription();
 
