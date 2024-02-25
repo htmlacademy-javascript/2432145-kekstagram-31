@@ -4,8 +4,8 @@ const messages = ['Всё отлично!',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
-const names = ['Виталий', 'Артём', 'Валерий', 'Кузьма', 'Артур', 'Платон', 'Александр', 'Тимур', 'Алексей', 'Арсений', 'Олег', 'Герасим',
-  'Антон', 'Василий'];
+const names = ['Виталий', 'Артём', 'Валерий', 'Кузьма', 'Артур', 'Платон', 'Александр', 'Тимур', 'Алексей', 'Арсений', 'Олег',
+  'Герасим', 'Антон', 'Василий'];
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -17,7 +17,7 @@ const getRandomInteger = (a, b) => {
 const getNumberId = getRandomInteger(1, 25);
 const getLikesNumber = getRandomInteger(15, 200);
 const getPhotoUrl = getRandomInteger(1, 25);
-const getCommentId = getRandomInteger();
+const getCommentId = getRandomInteger(Math.random(), Math.random());
 const getAvatarUrl = getRandomInteger(1, 6);
 const getCommentAmount = getRandomInteger(0, 30);
 
@@ -36,7 +36,7 @@ const getPhotoDescription = () => (
     url: `../photos/${getPhotoUrl}.jpg`,
     description: 'С рулетом на балконе',
     likes: getLikesNumber,
-    comments: Array.from({ length: getCommentAmount, getObjectComment }),
+    comments: Array.from({ length: getCommentAmount }, getObjectComment),
   }
 );
 
