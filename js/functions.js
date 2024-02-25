@@ -1,12 +1,9 @@
 //Необходимо создать следующие функции для ДЗ module2-task1:
 /* 1. Функция для проверки длины строки:
--выходныен данные: строка для проверки и длина строки для проверки.
+-входные данные: строка для проверки и длина строки для проверки.
 -result: если длина приходящей строки меньше или совпадает c length - приходит true, иначе false. */
 
-function compareLength(input, length) {
-  return input.length <= length;
-}
-
+const compareLength = (input = '', length = 1) => input.length <= length;
 
 compareLength('проверяемая строка', 20);
 compareLength('проверяемая строка', 18);
@@ -16,7 +13,7 @@ compareLength('проверяемая строка', 10);
 - Вывод: если да - true, иначе false.
 - Функция учитывает регистр и не учитывает пробелы. */
 
-function isPalindrome(input) {
+function isPalindrome(input = '') {
   const normalizeString = input.replaceAll(' ', '').toUpperCase();
   let palindromeString = '';
   for (let i = normalizeString.length - 1; i >= 0; i--) {
@@ -37,7 +34,7 @@ function getNumber(input) {
   const str = input.toString();
   let result = '';
   for (let i = 0; i < input.length; i++) {
-    const digit = parseInt(str[i],10);
+    const digit = parseInt(str[i], 10);
     if (!Number.isNaN(digit)) {
       result += digit;
     }
