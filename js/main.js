@@ -7,24 +7,24 @@ const messages = ['Всё отлично!',
 const names = ['Виталий', 'Артём', 'Валерий', 'Кузьма', 'Артур', 'Платон', 'Александр', 'Тимур', 'Алексей', 'Арсений', 'Олег',
   'Герасим', 'Антон', 'Василий'];
 
-const getRandomInteger = (a, b) => {
+const getRandomInteger = (a = 0, b = Infinity) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
 
+let getCommentId = 1;
 const getNumberId = getRandomInteger(1, 25);
 const getLikesNumber = getRandomInteger(15, 200);
 const getPhotoUrl = getRandomInteger(1, 25);
-const getCommentId = getRandomInteger(Math.random(), Math.random());
 const getAvatarUrl = getRandomInteger(1, 6);
 const getCommentAmount = getRandomInteger(0, 30);
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const getObjectComment = () => ({
-  id: getCommentId,
+  id: getCommentId++,
   avatar: `../img/avatar-${getAvatarUrl}.svg`,
   messages: getRandomArrayElement(messages),
   name: getRandomArrayElement(names),
@@ -36,9 +36,9 @@ const getPhotoDescription = () => (
     url: `../photos/${getPhotoUrl}.jpg`,
     description: 'С рулетом на балконе',
     likes: getLikesNumber,
-    comments: Array.from({length: getCommentAmount}, getObjectComment),
+    comments: Array.from({ length: getCommentAmount }, getObjectComment),
   }
 );
 
-getPhotoDescription();
+console.table(getPhotoDescription());
 
