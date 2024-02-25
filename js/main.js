@@ -36,7 +36,7 @@ const getPhotoDescription = () => (
     url: `../photos/${getPhotoUrl}.jpg`,
     description: 'С рулетом на балконе',
     likes: getLikesNumber,
-    comments: Array.from({ length: getCommentAmount }, getObjectComment),
+    comments: Array.from({length: getCommentAmount}, getObjectComment),
   }
 );
 
