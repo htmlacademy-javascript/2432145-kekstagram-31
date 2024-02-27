@@ -8,7 +8,7 @@ const NAMES = ['Виталий', 'Артём', 'Валерий', 'Кузьма',
   'Герасим', 'Антон', 'Василий'];
 const PHOTOS_COUNT = 25;
 
-//Функция для создания рандомного числа из выбранного диапозона.
+//Функция для создания рандомного числа из выбранного диапазона.
 const getRandomInteger = (a = 0, b = Infinity) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -25,11 +25,10 @@ function getGenerateId() {
   };
 }
 
-let getNumberId = getRandomInteger(1, 25);
-const getCommentId = getGenerateId();
-
 //Функция для выбора рандомного элемента массива.
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
+const getCommentId = getGenerateId();
 
 //Функция для создания объекта comment.
 function getObjectComment() {
@@ -42,13 +41,16 @@ function getObjectComment() {
   };
 }
 
+const generatePhotoId = getGenerateId();
+
 //Функция для создания описания(объекта) фотографии.
 function getPhotoDescription() {
   const getPhotoUrl = getRandomInteger(1, 25);
   const getLikesNumber = getRandomInteger(15, 200);
   const getCommentAmount = getRandomInteger(0, 30);
+  const id = generatePhotoId();
   const photoDescription = {
-    id: getNumberId++,
+    id,
     url: `../photos/${getPhotoUrl}.jpg`,
     description: 'С рулетом на балконе',
     likes: getLikesNumber,
