@@ -26,10 +26,6 @@ function getGenerateId() {
 }
 
 let getNumberId = getRandomInteger(1, 25);
-const getLikesNumber = getRandomInteger(15, 200);
-const getPhotoUrl = getRandomInteger(1, 25);
-const getAvatarUrl = getRandomInteger(1, 6);
-const getCommentAmount = getRandomInteger(0, 30);
 const getCommentId = getGenerateId();
 
 //Функция для выбора рандомного элемента массива.
@@ -37,6 +33,7 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 //Функция для создания объекта comment.
 function getObjectComment() {
+  const getAvatarUrl = getRandomInteger(1, 6);
   return {
     id: getCommentId(),
     avatar: `../img/avatar-${getAvatarUrl}.svg`,
@@ -47,6 +44,9 @@ function getObjectComment() {
 
 //Функция для создания описания(объекта) фотографии.
 function getPhotoDescription() {
+  const getPhotoUrl = getRandomInteger(1, 25);
+  const getLikesNumber = getRandomInteger(15, 200);
+  const getCommentAmount = getRandomInteger(0, 30);
   const photoDescription = {
     id: getNumberId++,
     url: `../photos/${getPhotoUrl}.jpg`,
