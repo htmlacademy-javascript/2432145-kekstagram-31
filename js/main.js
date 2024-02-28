@@ -28,13 +28,14 @@ function getGenerateId() {
 //Функция для выбора рандомного элемента массива.
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const getCommentId = getGenerateId();
+const generateCommentId = getGenerateId();
 
 //Функция для создания объекта comment.
 function getObjectComment() {
   const getAvatarUrl = getRandomInteger(1, 6);
+  const commeintId = generateCommentId();
   return {
-    id: getCommentId(),
+    id: commeintId,
     avatar: `../img/avatar-${getAvatarUrl}.svg`,
     messages: getRandomArrayElement(MESSAGES),
     name: getRandomArrayElement(NAMES),
@@ -45,16 +46,16 @@ const generatePhotoId = getGenerateId();
 
 //Функция для создания описания(объекта) фотографии.
 function getPhotoDescription() {
-  const getPhotoUrl = getRandomInteger(1, 25);
-  const getLikesNumber = getRandomInteger(15, 200);
-  const getCommentAmount = getRandomInteger(0, 30);
+  const photoId = getRandomInteger(1, 25);
+  const likesNumber = getRandomInteger(15, 200);
+  const commentAmount = getRandomInteger(0, 30);
   const id = generatePhotoId();
   const photoDescription = {
     id,
-    url: `../photos/${getPhotoUrl}.jpg`,
+    url: `../photos/${photoId}.jpg`,
     description: 'С рулетом на балконе',
-    likes: getLikesNumber,
-    comments: Array.from({ length: getCommentAmount }, getObjectComment),
+    likes: likesNumber,
+    comments: Array.from({ length: commentAmount }, getObjectComment),
   };
   return photoDescription;
 }
