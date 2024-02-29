@@ -47,3 +47,33 @@ getNumber('ECMAScript 2022');
 getNumber('1 кефир, 0.5 батона');
 getNumber('агент 007');
 getNumber('а я томат');
+
+/* 4. Напишите функцию, которая принимает время начала и конца рабочего дня, а также время старта и продолжительность встречи
+в минутах и возвращает true, если встреча не выходит за рамки рабочего дня, и false, если выходит.
+
+Время указывается в виде строки в формате часы:минуты. Для указания часов и минут могут использоваться как две цифры, так и одна.
+Например, 8 часов 5 минут могут быть указаны по-разному: 08:05, 8:5, 08:5 или 8:05.
+
+Продолжительность задаётся числом. Гарантируется, что и рабочий день, и встреча укладываются в одни календарные сутки. */
+
+
+// Функция для преобразования времени в минуты. Принимает строку формата часы:минуты и возвращает числовое значение в минутах.
+function convertToMinutes(time = '') {
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes;
+}
+
+function isFitsInTime(startDay = '', endDay = '', appTime = '', appDuration = 1) {
+  const startMinutes = convertToMinutes(startDay);
+  const endMinutes = convertToMinutes(endDay);
+  const appMinutes = convertToMinutes(appTime);
+
+  const endOfAppMinutes = appMinutes + appDuration;
+  return appMinutes >= startMinutes && endOfAppMinutes <= endMinutes;
+}
+
+isFitsInTime('09:00', '17:00', '10:30', 90);
+isFitsInTime('8:0', '10:0', '8:0', 120);
+isFitsInTime('08:00', '14:30', '14:00', 90);
+isFitsInTime('14:00', '17:30', '08:0', 90);
+isFitsInTime('8:00', '17:30', '08:00', 900);
