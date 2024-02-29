@@ -48,7 +48,4 @@ function getPhotoArray() {
   return photoArray;
 }
 
-getPhotoArray();
-
-
 export {getPhotoArray};
