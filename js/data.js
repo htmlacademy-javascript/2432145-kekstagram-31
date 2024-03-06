@@ -28,13 +28,12 @@ const generatePhotoId = getGenerateId();
 
 //Функция для создания описания(объекта) фотографии.
 function getPhotoDescription() {
-  const photoId = getRandomInteger(1, 25);
   const likesNumber = getRandomInteger(15, 200);
   const commentAmount = getRandomInteger(0, 30);
   const id = generatePhotoId();
   const photoDescription = {
     id,
-    url: `../photos/${photoId}.jpg`,
+    url: `../photos/${id}.jpg`,
     description: 'С рулетом на балконе',
     likes: likesNumber,
     comments: Array.from({ length: commentAmount }, getObjectComment),
