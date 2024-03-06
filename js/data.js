@@ -14,11 +14,11 @@ const generateCommentId = getGenerateId();
 
 //Функция для создания объекта comment.
 function getObjectComment() {
-  const getAvatarUrl = getRandomInteger(1, 6);
-  const commeintId = generateCommentId();
+  const avatarId = getRandomInteger(1, 6);
+  const commentId = generateCommentId();
   return {
-    id: commeintId,
-    avatar: `../img/avatar-${getAvatarUrl}.svg`,
+    id: commentId,
+    avatar: `../img/avatar-${avatarId}.svg`,
     messages: getRandomArrayElement(MESSAGES),
     name: getRandomArrayElement(NAMES),
   };
@@ -28,13 +28,12 @@ const generatePhotoId = getGenerateId();
 
 //Функция для создания описания(объекта) фотографии.
 function getPhotoDescription() {
-  const photoId = getRandomInteger(1, 25);
   const likesNumber = getRandomInteger(15, 200);
   const commentAmount = getRandomInteger(0, 30);
   const id = generatePhotoId();
   const photoDescription = {
     id,
-    url: `../photos/${photoId}.jpg`,
+    url: `../photos/${id}.jpg`,
     description: 'С рулетом на балконе',
     likes: likesNumber,
     comments: Array.from({ length: commentAmount }, getObjectComment),
