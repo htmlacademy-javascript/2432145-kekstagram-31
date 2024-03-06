@@ -14,11 +14,11 @@ const generateCommentId = getGenerateId();
 
 //Функция для создания объекта comment.
 function getObjectComment() {
-  const getAvatarUrl = getRandomInteger(1, 6);
-  const commeintId = generateCommentId();
+  const avatarId = getRandomInteger(1, 6);
+  const commentId = generateCommentId();
   return {
-    id: commeintId,
-    avatar: `../img/avatar-${getAvatarUrl}.svg`,
+    id: commentId,
+    avatar: `../img/avatar-${avatarId}.svg`,
     messages: getRandomArrayElement(MESSAGES),
     name: getRandomArrayElement(NAMES),
   };
