@@ -12,7 +12,7 @@ function createPicture(data) {
 
   const comments = picture.querySelector('.picture__comments');
   comments.textContent = comments.length;
-
+  picture.dataset.id = data.id;
   return picture;
 }
 
