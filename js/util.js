@@ -18,4 +18,8 @@ function getGenerateId() {
 //Функция для выбора рандомного элемента массива.
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {getRandomInteger, getGenerateId, getRandomArrayElement};
+function isEscapeKey (evt) {
+  return evt.key === 'Escape';
+}
+
+export {getRandomInteger, getGenerateId, getRandomArrayElement, isEscapeKey};
