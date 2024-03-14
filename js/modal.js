@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util.js';
+import { renderComments, resetCommentsCount } from './comment.js';
 
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureCancelButton = bigPictureContainer.querySelector('.big-picture__cancel');
@@ -6,15 +7,13 @@ const bigPictureCancelButton = bigPictureContainer.querySelector('.big-picture__
 const bigPictureImg = bigPictureContainer.querySelector('.big-picture__img > img');
 const likesCount = document.querySelector('.likes-count');
 const socialCaption = document.querySelector('.social__caption');
-const commentTemplate = document.querySelector('#comments').content.querySelector('.social__comment');
-const socialCommentsContainer = document.querySelector('.social__comments');
 const socialCommentCount = document.querySelector('.social__comment-count');
 const commentsLoaderButton = document.querySelector('.comments-loader');
 
+let pictureComments = [];
+
 function openBigPicture(data) {
   bigPictureContainer.classList.remove('hidden');
-  socialCommentCount.classList.add('hidden');
-  commentsLoaderButton.classList.add('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
@@ -23,6 +22,7 @@ function openBigPicture(data) {
   bigPictureImg.alt = data.description;
   likesCount.textContent = data.likes;
   socialCaption.textContent = data.description;
+  pictureComments = data.comments;
 
   renderComments(data.comments);
 }
@@ -33,6 +33,7 @@ function closeBigPicture() {
   commentsLoaderButton.classList.remove('hidden');
   document.body.classList.remove('modal-open');
 
+  resetCommentsCount();
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
@@ -49,23 +50,10 @@ function onDocumentKeydown(evt) {
   }
 }
 
-function createComment(data) {
-  const comment = commentTemplate.cloneNode(true);
-  comment.querySelector('.social__picture').src = data.avatar;
-  comment.querySelector('.social__picture').alt = data.name;
-  comment.querySelector('.social__text').textContent = data.messages;
-
-  return comment;
+function onCommentLoaderClick() {
+  renderComments(pictureComments);
 }
 
-function renderComments(comments) {
-  socialCommentsContainer.innerHTML = '';
-  const fragment = document.createDocumentFragment();
-  comments.forEach((item) => {
-    const comment = createComment(item);
-    fragment.append(comment);
-  });
-  socialCommentsContainer.append(fragment);
-}
+commentsLoaderButton.addEventListener('click', onCommentLoaderClick);
 
 export { openBigPicture };

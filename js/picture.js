@@ -11,7 +11,7 @@ function createPicture(data) {
   likes.textContent = data.likes;
 
   const comments = picture.querySelector('.picture__comments');
-  comments.textContent = comments.length;
+  comments.textContent = data.comments.length;
   picture.dataset.id = data.id;
   return picture;
 }
