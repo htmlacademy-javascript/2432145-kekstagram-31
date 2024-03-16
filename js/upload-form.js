@@ -24,6 +24,7 @@ function closeUploadWindow() {
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydownUpload);
+  uploadInputElement.innerHTML = '';
 }
 
 function onUploadCancelButtonClick() {
