@@ -1,4 +1,4 @@
-import { openBigPicture } from './modal.js';
+import { openModal } from './modal.js';
 
 const pictureContainer = document.querySelector('.pictures');
 
@@ -11,7 +11,7 @@ function renderBigPhoto(pictures) {
     evt.preventDefault();
     const id = Number(picture.dataset.id);
     const pictureData = pictures.find((item) => item.id === id);
-    openBigPicture(pictureData);
+    openModal(pictureData);
   });
 
 }
