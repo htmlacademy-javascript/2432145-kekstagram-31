@@ -1,9 +1,13 @@
 import { isEscapeKey } from './util';
 
+
 const uploadFormElement = document.querySelector('.img-upload__form');
-const uploadInputElement = uploadFormElement.querySelector('.img-upload__input');
+const uploadFileInputElement = uploadFormElement.querySelector('.img-upload__input');
 const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overlay');
 const uploadCancelButtonElement = uploadFormElement.querySelector('.img-upload__cancel');
+
+const hashtagInputElement = uploadFormElement.querySelector('.text__hashtags');
+
 
 function onDocumentKeydownUpload(evt) {
   if (isEscapeKey(evt)) {
@@ -24,7 +28,8 @@ function closeUploadWindow() {
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydownUpload);
-  uploadInputElement.innerHTML = '';
+  uploadFileInputElement.innerHTML = '';
+  hashtagInputElement.value = '';
 }
 
 function onUploadCancelButtonClick() {
@@ -33,6 +38,6 @@ function onUploadCancelButtonClick() {
 
 uploadCancelButtonElement.addEventListener('click', onUploadCancelButtonClick);
 
-uploadInputElement.addEventListener('change', openUploadWindow);
+uploadFileInputElement.addEventListener('change', openUploadWindow);
 
-export {openUploadWindow, closeUploadWindow};
+export { openUploadWindow, closeUploadWindow };
