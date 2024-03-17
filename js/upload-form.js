@@ -5,6 +5,7 @@ const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFileInputElement = uploadFormElement.querySelector('.img-upload__input');
 const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overlay');
 const uploadCancelButtonElement = uploadFormElement.querySelector('.img-upload__cancel');
+const uploadWrapperElement = uploadFormElement.querySelectorAll('.img-upload__field-wrapper');
 
 const hashtagInputElement = uploadFormElement.querySelector('.text__hashtags');
 
@@ -25,6 +26,9 @@ function openUploadWindow() {
 
 function closeUploadWindow() {
   uploadOverlayElement.classList.add('hidden');
+  uploadWrapperElement.forEach((item) => {
+    item.classList.remove('img-upload__field-wrapper--error');
+  });
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydownUpload);

@@ -16,7 +16,13 @@ function validateHashtags(value) {
   return hashtag.test(value);
 }
 
+function validateComments(value) {
+  const comment = /^[a-zа-яё0-9]{0,140}$/i;
+  return comment.test(value);
+}
+
 pristine.addValidator(uploadFormElement.querySelector('[name="hashtags"]'), validateHashtags, 'Невалидный хештег.');
+pristine.addValidator(uploadFormElement.querySelector('[name="description"]'), validateComments, 'Невалидный комментарий.');
 
 uploadFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
