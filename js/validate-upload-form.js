@@ -8,7 +8,7 @@ const pristine = new Pristine(uploadFormElement, {
   errorTextClass: 'upload-form--error'
 });
 
-function validateHashtags(value) {
+function validatorHashtag(value) {
   const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
   /* регулярное выражение для валидации хештегов- начинается с #(^#), используются символы от A до Z и
     от А до Я с буквой Ё  и арабскими цифрами от 0 до 9([a-zа-яё0-9]), длина от 1 до 20 символов({1,19}), включая #,
@@ -16,15 +16,23 @@ function validateHashtags(value) {
   return hashtag.test(value);
 }
 
-function validateComments(value) {
+function validatorComment(value) {
   const comment = /^[a-zа-яё0-9]{0,140}$/i;
   return comment.test(value);
 }
 
-pristine.addValidator(uploadFormElement.querySelector('[name="hashtags"]'), validateHashtags, 'Невалидный хештег.');
-pristine.addValidator(uploadFormElement.querySelector('[name="description"]'), validateComments, 'Невалидный комментарий.');
+function validateHashtags() {
+  pristine.addValidator(uploadFormElement.querySelector('[name="hashtags"]'), validatorHashtag, 'Невалидный хештег.');
+}
+
+function validateComments() {
+  pristine.addValidator(uploadFormElement.querySelector('[name="description"]'), validatorComment, 'Невалидный комментарий.');
+}
+
 
 uploadFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
+
+export {validateHashtags, validateComments};
