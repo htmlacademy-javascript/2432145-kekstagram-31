@@ -1,10 +1,10 @@
 import { isEscapeKey } from './util.js';
 import { renderComments, resetCommentsCount } from './comment.js';
 
-const bigPictureContainer = document.querySelector('.big-picture');
-const bigPictureCancelButton = bigPictureContainer.querySelector('.big-picture__cancel');
+const modalContainer = document.querySelector('.big-picture');
+const modalCancelButton = modalContainer.querySelector('.big-picture__cancel');
 
-const bigPictureImg = bigPictureContainer.querySelector('.big-picture__img > img');
+const bigPictureImg = modalContainer.querySelector('.big-picture__img > img');
 const likesCount = document.querySelector('.likes-count');
 const socialCaption = document.querySelector('.social__caption');
 const socialCommentCount = document.querySelector('.social__comment-count');
@@ -12,8 +12,8 @@ const commentsLoaderButton = document.querySelector('.comments-loader');
 
 let pictureComments = [];
 
-function openBigPicture(data) {
-  bigPictureContainer.classList.remove('hidden');
+function openModal(data) {
+  modalContainer.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
@@ -27,8 +27,8 @@ function openBigPicture(data) {
   renderComments(data.comments);
 }
 
-function closeBigPicture() {
-  bigPictureContainer.classList.add('hidden');
+function closeModal() {
+  modalContainer.classList.add('hidden');
   socialCommentCount.classList.remove('hidden');
   commentsLoaderButton.classList.remove('hidden');
   document.body.classList.remove('modal-open');
@@ -38,15 +38,15 @@ function closeBigPicture() {
 }
 
 function onBigPictureCancelButtonClick() {
-  closeBigPicture();
+  closeModal();
 }
 
-bigPictureCancelButton.addEventListener('click', onBigPictureCancelButtonClick);
+modalCancelButton.addEventListener('click', onBigPictureCancelButtonClick);
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPicture();
+    closeModal();
   }
 }
 
@@ -56,4 +56,4 @@ function onCommentLoaderClick() {
 
 commentsLoaderButton.addEventListener('click', onCommentLoaderClick);
 
-export { openBigPicture };
+export { openModal };
