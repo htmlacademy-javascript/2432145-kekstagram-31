@@ -1,38 +1,47 @@
 const uploadFormElement = document.querySelector('.img-upload__form');
+const hashtagsInputElement = document.querySelector('.text__hashtags');
+const REGEX_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
+/* регулярное выражение для валидации хештегов- начинается с #(^#), используются символы от A до Z и
+  от А до Я с буквой Ё  и арабскими цифрами от 0 до 9([a-zа-яё0-9]), длина от 1 до 20 символов({1,19}), включая #,
+  не учитывает регистр (модификатор i). */
 
 const pristine = new Pristine(uploadFormElement, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextTag: 'p',
+  errorTextTag: 'div',
   errorTextClass: 'upload-form--error'
-});
+}, false
+);
 
-function validatorHashtag(value) {
-  const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-  /* регулярное выражение для валидации хештегов- начинается с #(^#), используются символы от A до Z и
-    от А до Я с буквой Ё  и арабскими цифрами от 0 до 9([a-zа-яё0-9]), длина от 1 до 20 символов({1,19}), включая #,
-   не учитывает регистр (модификатор i). */
-  return hashtag.test(value);
+function formatHashtags(value) {
+  return value.trim().split(' ').filter(Boolean);
 }
 
-function validatorComment(value) {
-  const comment = /^[a-zа-яё0-9]{0,140}$/i;
-  return comment.test(value);
+function validateHashtagsCount(value) {
+  const hashtags = formatHashtags(value);
+  return hashtags.length <= 5;
 }
 
-function validateHashtags() {
-  pristine.addValidator(uploadFormElement.querySelector('[name="hashtags"]'), validatorHashtag, 'Невалидный хештег.');
+function validateHashtagsDuplicates(value) {
+  const lowerCaseTags = formatHashtags(value).map((tag) => tag.toLowerCase());
+  const uniqTags = new Set(lowerCaseTags);
+  return uniqTags.size === lowerCaseTags.length;
 }
 
-function validateComments() {
-  pristine.addValidator(uploadFormElement.querySelector('[name="description"]'), validatorComment, 'Невалидный комментарий.');
+function validateHashtags(value) {
+  const hashtags = formatHashtags(value);
+  return hashtags.every((item) => REGEX_HASHTAG.test(item));
 }
 
+
+pristine.addValidator(hashtagsInputElement, validateHashtags, 'Невалидный хештег.', 1, false);
+pristine.addValidator(hashtagsInputElement, validateHashtagsCount, 'Не более 5 хештегов.', 2, false);
+pristine.addValidator(hashtagsInputElement, validateHashtagsDuplicates, 'Хештег должен быть уникальным.', 3, false);
 
 uploadFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
 
-export {validateHashtags, validateComments};
+export { pristine };
