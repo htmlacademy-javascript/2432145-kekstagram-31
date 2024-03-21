@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util';
 import { pristine } from './validate-upload-form';
+import { resetScale } from './zoom';
 
 
 const uploadFormElement = document.querySelector('.img-upload__form');
@@ -51,6 +52,7 @@ function closeUploadWindow() {
   hashtagInputElement.value = '';
   uploadFormElement.reset();
   pristine.reset();
+  resetScale();
 }
 
 function createUploadHandlers() {
