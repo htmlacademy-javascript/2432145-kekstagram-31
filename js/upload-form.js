@@ -1,7 +1,7 @@
 import { isEscapeKey } from './util';
 import { pristine } from './validate-upload-form';
 import { resetScale } from './zoom';
-import './effects.js';
+import { resetEffect } from './effects';
 
 
 const uploadFormElement = document.querySelector('.img-upload__form');
@@ -54,6 +54,7 @@ function closeUploadWindow() {
   uploadFormElement.reset();
   pristine.reset();
   resetScale();
+  resetEffect();
 }
 
 function createUploadHandlers() {
