@@ -1,4 +1,4 @@
-export const effectData = {
+const effectData = {
   none: {
     style: 'none',
     min: 0,
@@ -42,3 +42,5 @@ export const effectData = {
     unit: '',
   },
 };
+
+export { effectData };

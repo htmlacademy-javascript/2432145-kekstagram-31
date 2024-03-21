@@ -1,6 +1,7 @@
 import { isEscapeKey } from './util';
 import { pristine } from './validate-upload-form';
 import { resetScale } from './zoom';
+import './effects.js';
 
 
 const uploadFormElement = document.querySelector('.img-upload__form');
