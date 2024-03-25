@@ -5,7 +5,8 @@ noUiSlider.create(sliderElement, {
     min: 0,
     max: 100,
   },
-  start: 80
+  start: 80,
+  connect: 'lower'
 });
 
 function updateSliderConfig(effect) {
