@@ -2,17 +2,24 @@ import { isEscapeKey } from './util';
 import { pristine } from './validate-upload-form';
 import { resetScale } from './zoom';
 import { resetEffect } from './effects';
+import { uploadPicture } from './api';
+import { showUploadSuccess, showErrorUpload } from './message';
 
 
 const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFileInputElement = uploadFormElement.querySelector('.img-upload__input');
 const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overlay');
 const uploadCancelButtonElement = uploadFormElement.querySelector('.img-upload__cancel');
+const uplodadSubmitButton = uploadFormElement.querySelector('#upload-submit');
 
 const hashtagInputElement = uploadFormElement.querySelector('.text__hashtags');
 
 
 function onDocumentKeydownUpload(evt) {
+  const isErrorUploadVisible = document.querySelector('.error');
+  if (isErrorUploadVisible) {
+    return;
+  }
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     if (document.activeElement.closest('.img-upload__field-wrapper')) {
@@ -30,9 +37,23 @@ function onUploadCancelButtonClick() {
   closeUploadWindow();
 }
 
-function onSubmitForm(evt) {
+async function onSubmitForm(evt) {
   evt.preventDefault();
-  pristine.validate();
+  const isFormValid = pristine.validate();
+  if (!isFormValid) {
+    return;
+  }
+  const formData = new FormData(uploadFormElement);
+  uplodadSubmitButton.disabled = true;
+  try {
+    await uploadPicture(formData);
+    closeUploadWindow();
+    showUploadSuccess();
+  } catch {
+    showErrorUpload();
+  } finally {
+    uplodadSubmitButton.disabled = false;
+  }
 }
 
 function openUploadWindow() {
@@ -57,10 +78,10 @@ function closeUploadWindow() {
   resetEffect();
 }
 
-function createUploadHandlers() {
+function configUploadHandlers() {
   uploadCancelButtonElement.addEventListener('click', onUploadCancelButtonClick);
   uploadFileInputElement.addEventListener('change', onFileInputChange);
 }
 
 
-export { createUploadHandlers };
+export { configUploadHandlers };

@@ -19,7 +19,7 @@ function getObjectComment() {
   return {
     id: commentId,
     avatar: `../img/avatar-${avatarId}.svg`,
-    messages: getRandomArrayElement(MESSAGES),
+    message: getRandomArrayElement(MESSAGES),
     name: getRandomArrayElement(NAMES),
   };
 }

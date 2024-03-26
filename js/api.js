@@ -3,5 +3,11 @@ async function fetchPictures() {
   return await response.json();
 }
 
-//https://31.javascript.htmlacademy.pro/kekstagram/data
-export { fetchPictures};
+async function uploadPicture(body) {
+  await fetch('https://31.javascript.htmlacademy.pro/kekstagram', {
+    method: 'POST',
+    body
+  });
+}
+
+export { fetchPictures, uploadPicture };
