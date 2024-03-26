@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util';
 
-const errorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
+const errorDataTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const templates = {
   successUploadTemplate: document.querySelector('#success').content.querySelector('.success'),
   errorUploadTemplate: document.querySelector('#error').content.querySelector('.error')
@@ -31,7 +31,7 @@ function showErrorUpload() {
 }
 
 function showFetchError() {
-  const errorElement = errorTemplate.cloneNode(true);
+  const errorElement = errorDataTemplate.cloneNode(true);
   document.body.appendChild(errorElement);
   setTimeout(() => (errorElement.remove()), 5000);
 }
