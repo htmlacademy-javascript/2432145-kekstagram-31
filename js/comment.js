@@ -11,7 +11,7 @@ function createComment(data) {
   const comment = commentTemplate.cloneNode(true);
   comment.querySelector('.social__picture').src = data.avatar;
   comment.querySelector('.social__picture').alt = data.name;
-  comment.querySelector('.social__text').textContent = data.messages;
+  comment.querySelector('.social__text').textContent = data.message;
 
   return comment;
 }

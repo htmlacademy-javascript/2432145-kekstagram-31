@@ -1,9 +1,16 @@
-import {getPhotoArray} from './data.js';
-import {renderPictures} from './picture.js';
-import {renderBigPhoto} from './big-picture.js';
-import { createUploadHandlers } from './upload-form.js';
+import { renderBigPhoto } from './big-picture.js';
+import { configUploadHandlers } from './upload-form.js';
+import { fetchPictures } from './api.js';
+import { showFetchError } from './message.js';
 
-const pictures = getPhotoArray();
-createUploadHandlers();
-renderPictures(pictures);
-renderBigPhoto(pictures);
+async function bootstrapApp() {
+  configUploadHandlers();
+  try {
+    const pictures = await fetchPictures();
+    renderBigPhoto(pictures);
+  } catch {
+    showFetchError();
+  }
+}
+
+bootstrapApp();
