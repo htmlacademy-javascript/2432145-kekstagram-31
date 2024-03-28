@@ -11,9 +11,10 @@ const uploadFileInputElement = uploadFormElement.querySelector('.img-upload__inp
 const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overlay');
 const uploadCancelButtonElement = uploadFormElement.querySelector('.img-upload__cancel');
 const uplodadSubmitButton = uploadFormElement.querySelector('#upload-submit');
+const uploadPreview = document.querySelector('.img-upload__preview > img');
+const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
 
 const hashtagInputElement = uploadFormElement.querySelector('.text__hashtags');
-
 
 function onDocumentKeydownUpload(evt) {
   const isErrorUploadVisible = document.querySelector('.error');
@@ -30,6 +31,13 @@ function onDocumentKeydownUpload(evt) {
 }
 
 function onFileInputChange() {
+  const file = uploadFileInputElement.files[0];
+  const url = URL.createObjectURL(file);
+  uploadPreview.src = url;
+  uploadPreviewEffects.forEach((item) => {
+    item.style.backgroundImage = `url(${url})`;
+  });
+
   openUploadWindow();
 }
 
