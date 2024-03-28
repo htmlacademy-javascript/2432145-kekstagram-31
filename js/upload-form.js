@@ -5,7 +5,7 @@ import { resetEffect } from './effects';
 import { uploadPicture } from './api';
 import { showUploadSuccess, showErrorUpload } from './message';
 
-const FILE_TYPES = ['jpg', 'jpeg', 'png', 'jfif', 'gif'];
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'gif', 'jfif'];
 
 const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFileInputElement = uploadFormElement.querySelector('.img-upload__input');
@@ -41,6 +41,8 @@ function onFileInputChange() {
     uploadPreviewEffects.forEach((item) => {
       item.style.backgroundImage = `url(${url})`;
     });
+  }else {
+    file.reset();
   }
 
   openUploadWindow();
