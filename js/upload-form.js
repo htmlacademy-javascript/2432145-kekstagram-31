@@ -5,15 +5,17 @@ import { resetEffect } from './effects';
 import { uploadPicture } from './api';
 import { showUploadSuccess, showErrorUpload } from './message';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'gif', 'jfif'];
 
 const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFileInputElement = uploadFormElement.querySelector('.img-upload__input');
 const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overlay');
 const uploadCancelButtonElement = uploadFormElement.querySelector('.img-upload__cancel');
 const uplodadSubmitButton = uploadFormElement.querySelector('#upload-submit');
+const uploadPreview = document.querySelector('.img-upload__preview > img');
+const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
 
 const hashtagInputElement = uploadFormElement.querySelector('.text__hashtags');
-
 
 function onDocumentKeydownUpload(evt) {
   const isErrorUploadVisible = document.querySelector('.error');
@@ -30,6 +32,19 @@ function onDocumentKeydownUpload(evt) {
 }
 
 function onFileInputChange() {
+  const file = uploadFileInputElement.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
+  if (matches) {
+    const url = URL.createObjectURL(file);
+    uploadPreview.src = url;
+    uploadPreviewEffects.forEach((item) => {
+      item.style.backgroundImage = `url(${url})`;
+    });
+  }else {
+    file.reset();
+  }
+
   openUploadWindow();
 }
 
@@ -45,6 +60,7 @@ async function onSubmitForm(evt) {
   }
   const formData = new FormData(uploadFormElement);
   uplodadSubmitButton.disabled = true;
+  uplodadSubmitButton.textContent = 'Сохраняю';
   try {
     await uploadPicture(formData);
     closeUploadWindow();
@@ -53,6 +69,7 @@ async function onSubmitForm(evt) {
     showErrorUpload();
   } finally {
     uplodadSubmitButton.disabled = false;
+    uplodadSubmitButton.textContent = 'Опубликовать';
   }
 }
 

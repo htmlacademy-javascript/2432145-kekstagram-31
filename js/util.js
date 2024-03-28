@@ -18,8 +18,16 @@ function getGenerateId() {
 //Функция для выбора рандомного элемента массива.
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-function isEscapeKey (evt) {
+function isEscapeKey(evt) {
   return evt.key === 'Escape';
 }
 
-export {getRandomInteger, getGenerateId, getRandomArrayElement, isEscapeKey};
+function debounce(callback, timeoutDelay = 500) {
+  let timeoutId;
+  return function() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback(...arguments), timeoutDelay);
+  };
+}
+
+export { getRandomInteger, getGenerateId, getRandomArrayElement, isEscapeKey, debounce };
