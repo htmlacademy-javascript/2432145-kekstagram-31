@@ -5,6 +5,7 @@ const templates = {
   successUploadTemplate: document.querySelector('#success').content.querySelector('.success'),
   errorUploadTemplate: document.querySelector('#error').content.querySelector('.error')
 };
+const REMOVE_ERROR_BLOCK_TIMER = 5000;
 
 function showMessage(template) {
   const messageElement = template.cloneNode(true);
@@ -33,7 +34,7 @@ function showErrorUpload() {
 function showFetchError() {
   const errorElement = errorDataTemplate.cloneNode(true);
   document.body.appendChild(errorElement);
-  setTimeout(() => (errorElement.remove()), 5000);
+  setTimeout(() => (errorElement.remove()), REMOVE_ERROR_BLOCK_TIMER);
 }
 
 function onDocumentKeydown(evt) {

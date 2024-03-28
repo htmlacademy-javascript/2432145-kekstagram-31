@@ -45,6 +45,7 @@ async function onSubmitForm(evt) {
   }
   const formData = new FormData(uploadFormElement);
   uplodadSubmitButton.disabled = true;
+  uplodadSubmitButton.textContent = 'Сохраняю';
   try {
     await uploadPicture(formData);
     closeUploadWindow();
@@ -53,6 +54,7 @@ async function onSubmitForm(evt) {
     showErrorUpload();
   } finally {
     uplodadSubmitButton.disabled = false;
+    uplodadSubmitButton.textContent = 'Опубликовать';
   }
 }
 
