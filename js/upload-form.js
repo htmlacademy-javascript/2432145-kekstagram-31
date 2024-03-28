@@ -5,6 +5,7 @@ import { resetEffect } from './effects';
 import { uploadPicture } from './api';
 import { showUploadSuccess, showErrorUpload } from './message';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'jfif', 'gif'];
 
 const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFileInputElement = uploadFormElement.querySelector('.img-upload__input');
@@ -32,11 +33,15 @@ function onDocumentKeydownUpload(evt) {
 
 function onFileInputChange() {
   const file = uploadFileInputElement.files[0];
-  const url = URL.createObjectURL(file);
-  uploadPreview.src = url;
-  uploadPreviewEffects.forEach((item) => {
-    item.style.backgroundImage = `url(${url})`;
-  });
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
+  if (matches) {
+    const url = URL.createObjectURL(file);
+    uploadPreview.src = url;
+    uploadPreviewEffects.forEach((item) => {
+      item.style.backgroundImage = `url(${url})`;
+    });
+  }
 
   openUploadWindow();
 }
