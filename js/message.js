@@ -5,6 +5,7 @@ const templates = {
   successUploadTemplate: document.querySelector('#success').content.querySelector('.success'),
   errorUploadTemplate: document.querySelector('#error').content.querySelector('.error')
 };
+const REMOVE_ERROR_BLOCK_TIMER = 5000;
 
 function showMessage(template) {
   const messageElement = template.cloneNode(true);
@@ -30,10 +31,17 @@ function showErrorUpload() {
   return showMessage(templates.errorUploadTemplate);
 }
 
-function showFetchError() {
+function showToastError(errorMessage) {
   const errorElement = errorDataTemplate.cloneNode(true);
+  if (errorMessage) {
+    errorElement.querySelector('.data-error__title').textContent = errorMessage;
+  }
   document.body.appendChild(errorElement);
-  setTimeout(() => (errorElement.remove()), 5000);
+  setTimeout(() => (errorElement.remove()), REMOVE_ERROR_BLOCK_TIMER);
+}
+
+function showFetchError() {
+  showToastError();
 }
 
 function onDocumentKeydown(evt) {
@@ -49,4 +57,4 @@ function onBodyClick(evt) {
   }
 }
 
-export { showFetchError, showUploadSuccess, showErrorUpload };
+export { showFetchError, showUploadSuccess, showErrorUpload, showToastError };
