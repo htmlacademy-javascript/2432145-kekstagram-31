@@ -1,7 +1,20 @@
 import { renderBigPhoto } from './big-picture';
 import { debounce } from './util';
 
-let currentFilter = 'filter-default';
+const FILTER = {
+  default: 'filter-default',
+  random: 'filter-random',
+  discussed: 'filter-discussed'
+};
+
+const SORTFUNC = {
+  random: () => 0.5 - Math.random(),
+  discussed: (a, b) => b.comments.length - a.comments.length
+};
+
+const MAX_PICTURE_COUNT = 10;
+
+let currentFilter = FILTER.default;
 let pictures = [];
 const filterElement = document.querySelector('.img-filters');
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
@@ -27,14 +40,14 @@ function onFilterChange(evt) {
 
 function applyFilter() {
   let filteredPictures = [];
-  if (currentFilter === 'filter-default') {
+  if (currentFilter === FILTER.default) {
     filteredPictures = pictures;
   }
-  if (currentFilter === 'filter-random') {
-    filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, 10);
+  if (currentFilter === FILTER.random) {
+    filteredPictures = pictures.toSorted(SORTFUNC.random).slice(0, MAX_PICTURE_COUNT);
   }
-  if (currentFilter === 'filter-discussed') {
-    filteredPictures = pictures.toSorted((a, b) => b.comments.length - a.comments.length);
+  if (currentFilter === FILTER.discussed) {
+    filteredPictures = pictures.toSorted(SORTFUNC.discussed);
   }
   debounceRender(filteredPictures);
 }

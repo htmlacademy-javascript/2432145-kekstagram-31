@@ -1,28 +1,10 @@
-//Функция для создания рандомного числа из выбранного диапазона.
-const getRandomInteger = (a = 0, b = Infinity) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-//Функция для создания рандомного ID.
-function getGenerateId() {
-  let lastGeneratedId = 0;
-  return function () {
-    lastGeneratedId++;
-    return lastGeneratedId;
-  };
-}
-
-//Функция для выбора рандомного элемента массива.
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+const DEBOUNCE_DELAY = 500;
 
 function isEscapeKey(evt) {
   return evt.key === 'Escape';
 }
 
-function debounce(callback, timeoutDelay = 500) {
+function debounce(callback, timeoutDelay = DEBOUNCE_DELAY) {
   let timeoutId;
   return function() {
     clearTimeout(timeoutId);
@@ -30,4 +12,4 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
-export { getRandomInteger, getGenerateId, getRandomArrayElement, isEscapeKey, debounce };
+export { isEscapeKey, debounce };

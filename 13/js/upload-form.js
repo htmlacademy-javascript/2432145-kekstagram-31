@@ -4,16 +4,19 @@ import { resetScale } from './zoom';
 import { resetEffect } from './effects';
 import { uploadPicture } from './api';
 import { showUploadSuccess, showErrorUpload } from './message';
+import { showToastError } from './message';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'gif', 'jfif'];
 
 const uploadFormElement = document.querySelector('.img-upload__form');
 const uploadFileInputElement = uploadFormElement.querySelector('.img-upload__input');
 const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overlay');
 const uploadCancelButtonElement = uploadFormElement.querySelector('.img-upload__cancel');
 const uplodadSubmitButton = uploadFormElement.querySelector('#upload-submit');
+const uploadPreview = document.querySelector('.img-upload__preview > img');
+const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
 
 const hashtagInputElement = uploadFormElement.querySelector('.text__hashtags');
-
 
 function onDocumentKeydownUpload(evt) {
   const isErrorUploadVisible = document.querySelector('.error');
@@ -30,6 +33,21 @@ function onDocumentKeydownUpload(evt) {
 }
 
 function onFileInputChange() {
+  const file = uploadFileInputElement.files[0];
+  const fileName = file.name.toLowerCase();
+  const fileExtantion = fileName.split('.').pop();
+  const matches = FILE_TYPES.includes(fileExtantion);
+  if (matches) {
+    const url = URL.createObjectURL(file);
+    uploadPreview.src = url;
+    uploadPreviewEffects.forEach((item) => {
+      item.style.backgroundImage = `url(${url})`;
+    });
+  }else {
+    showToastError('Неверный тип файла');
+    return;
+  }
+
   openUploadWindow();
 }
 
