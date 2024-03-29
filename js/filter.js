@@ -40,14 +40,16 @@ function onFilterChange(evt) {
 
 function applyFilter() {
   let filteredPictures = [];
-  if (currentFilter === FILTER.default) {
-    filteredPictures = pictures;
-  }
-  if (currentFilter === FILTER.random) {
-    filteredPictures = pictures.toSorted(SORTFUNC.random).slice(0, MAX_PICTURE_COUNT);
-  }
-  if (currentFilter === FILTER.discussed) {
-    filteredPictures = pictures.toSorted(SORTFUNC.discussed);
+  switch (currentFilter) {
+    case FILTER.default:
+      filteredPictures = pictures;
+      break;
+    case FILTER.random:
+      filteredPictures = pictures.toSorted(SORTFUNC.random).slice(0, MAX_PICTURE_COUNT);
+      break;
+    case FILTER.discussed:
+      filteredPictures = pictures.toSorted(SORTFUNC.discussed);
+      break;
   }
   debounceRender(filteredPictures);
 }
