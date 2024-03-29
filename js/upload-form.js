@@ -4,6 +4,7 @@ import { resetScale } from './zoom';
 import { resetEffect } from './effects';
 import { uploadPicture } from './api';
 import { showUploadSuccess, showErrorUpload } from './message';
+import { showToastError } from './message';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png', 'gif', 'jfif'];
 
@@ -34,7 +35,8 @@ function onDocumentKeydownUpload(evt) {
 function onFileInputChange() {
   const file = uploadFileInputElement.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
+  const fileExtantion = fileName.split('.').pop();
+  const matches = FILE_TYPES.includes(fileExtantion);
   if (matches) {
     const url = URL.createObjectURL(file);
     uploadPreview.src = url;
@@ -42,7 +44,8 @@ function onFileInputChange() {
       item.style.backgroundImage = `url(${url})`;
     });
   }else {
-    file.reset();
+    showToastError('Неверный тип файла');
+    return;
   }
 
   openUploadWindow();
