@@ -7,9 +7,14 @@ const FILTER = {
   discussed: 'filter-discussed'
 };
 
-const ARRAY_INTERVAL = 10;
+const SORTFUNC = {
+  random: () => 0.5 - Math.random(),
+  discussed: (a, b) => b.comments.length - a.comments.length
+};
 
-let currentFilter = 'filter-default';
+const MAX_PICTURE_COUNT = 10;
+
+let currentFilter = FILTER.default;
 let pictures = [];
 const filterElement = document.querySelector('.img-filters');
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
@@ -39,10 +44,10 @@ function applyFilter() {
     filteredPictures = pictures;
   }
   if (currentFilter === FILTER.random) {
-    filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, ARRAY_INTERVAL);
+    filteredPictures = pictures.toSorted(SORTFUNC.random).slice(0, MAX_PICTURE_COUNT);
   }
   if (currentFilter === FILTER.discussed) {
-    filteredPictures = pictures.toSorted((a, b) => b.comments.length - a.comments.length);
+    filteredPictures = pictures.toSorted(SORTFUNC.discussed);
   }
   debounceRender(filteredPictures);
 }
