@@ -1,7 +1,7 @@
 const scaleInput = document.querySelector('.scale__control--value');
 const scaleSmallerButton = document.querySelector('.scale__control--smaller');
 const scaleBiggerButton = document.querySelector('.scale__control--bigger');
-const preview = document.querySelector('.img-upload__preview');
+const preview = document.querySelector('.img-upload__preview > img');
 
 let scale = 1;
 const MIN_SCALE = 0.25;
