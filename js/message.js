@@ -1,11 +1,12 @@
 import { isEscapeKey } from './util';
 
+const REMOVE_ERROR_BLOCK_TIMER = 5000;
+
 const errorDataTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const templates = {
   successUploadTemplate: document.querySelector('#success').content.querySelector('.success'),
   errorUploadTemplate: document.querySelector('#error').content.querySelector('.error')
 };
-const REMOVE_ERROR_BLOCK_TIMER = 5000;
 
 function showMessage(template) {
   const messageElement = template.cloneNode(true);

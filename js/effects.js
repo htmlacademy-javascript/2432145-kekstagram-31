@@ -1,4 +1,4 @@
-import { effectData } from './effectsData';
+import { effectData } from './effects-data';
 import { updateSliderConfig, sliderElement } from './slider';
 
 let currentEffect = 'none';

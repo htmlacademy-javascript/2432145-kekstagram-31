@@ -7,7 +7,7 @@ const FILTER = {
   discussed: 'filter-discussed'
 };
 
-const SORTFUNC = {
+const sortFunction = {
   random: () => 0.5 - Math.random(),
   discussed: (a, b) => b.comments.length - a.comments.length
 };
@@ -45,10 +45,10 @@ function applyFilter() {
       filteredPictures = pictures;
       break;
     case FILTER.random:
-      filteredPictures = pictures.toSorted(SORTFUNC.random).slice(0, MAX_PICTURE_COUNT);
+      filteredPictures = pictures.toSorted(sortFunction.random).slice(0, MAX_PICTURE_COUNT);
       break;
     case FILTER.discussed:
-      filteredPictures = pictures.toSorted(SORTFUNC.discussed);
+      filteredPictures = pictures.toSorted(sortFunction.discussed);
       break;
   }
   debounceRender(filteredPictures);
