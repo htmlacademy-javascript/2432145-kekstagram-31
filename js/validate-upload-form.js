@@ -1,9 +1,10 @@
-const uploadFormElement = document.querySelector('.img-upload__form');
-const hashtagsInputElement = document.querySelector('.text__hashtags');
 const REGEX_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 /* регулярное выражение для валидации хештегов- начинается с #(^#), используются символы от A до Z и
   от А до Я с буквой Ё  и арабскими цифрами от 0 до 9([a-zа-яё0-9]), длина от 1 до 20 символов({1,19}), включая #,
   не учитывает регистр (модификатор i). */
+const uploadFormElement = document.querySelector('.img-upload__form');
+const hashtagsInputElement = document.querySelector('.text__hashtags');
+
 
 const pristine = new Pristine(uploadFormElement, {
   classTo: 'img-upload__field-wrapper',
@@ -14,25 +15,23 @@ const pristine = new Pristine(uploadFormElement, {
 }, false
 );
 
-function formatHashtags(value) {
-  return value.trim().split(' ').filter(Boolean);
-}
+const formatHashtags = (value) => value.trim().split(' ').filter(Boolean);
 
-function validateHashtagsCount(value) {
+const validateHashtagsCount = (value) => {
   const hashtags = formatHashtags(value);
   return hashtags.length <= 5;
-}
+};
 
-function validateHashtagsDuplicates(value) {
+const validateHashtagsDuplicates = (value) => {
   const lowerCaseTags = formatHashtags(value).map((tag) => tag.toLowerCase());
   const uniqTags = new Set(lowerCaseTags);
   return uniqTags.size === lowerCaseTags.length;
-}
+};
 
-function validateHashtags(value) {
+const validateHashtags = (value) => {
   const hashtags = formatHashtags(value);
   return hashtags.every((item) => REGEX_HASHTAG.test(item));
-}
+};
 
 
 pristine.addValidator(hashtagsInputElement, validateHashtags, 'Невалидный хештег.', 1, false);

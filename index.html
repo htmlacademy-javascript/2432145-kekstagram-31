@@ -39,7 +39,8 @@
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
-              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required accept="image/*">
+              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required
+                accept="image/*">
               <label for="upload-file" class="img-upload__label  img-upload__control">Загрузить</label>
             </fieldset>
 
@@ -131,7 +132,9 @@
                     <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" autocomplete="off">
                   </div>
                   <div class="img-upload__field-wrapper">
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
+                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..."
+                      data-pristine-maxlength="140"
+                      data-pristine-maxlength-message="Комментарий не должен быть больше 140 символов"></textarea>
                   </div>
                 </fieldset>
 

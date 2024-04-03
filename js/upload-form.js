@@ -18,7 +18,7 @@ const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
 
 const hashtagInputElement = uploadFormElement.querySelector('.text__hashtags');
 
-function onDocumentKeydownUpload(evt) {
+const onDocumentKeydownUpload = (evt) => {
   const isErrorUploadVisible = document.querySelector('.error');
   if (isErrorUploadVisible) {
     return;
@@ -30,9 +30,9 @@ function onDocumentKeydownUpload(evt) {
     }
     closeUploadWindow();
   }
-}
+};
 
-function onFileInputChange() {
+const onFileInputChange = () => {
   const file = uploadFileInputElement.files[0];
   const fileName = file.name.toLowerCase();
   const fileExtantion = fileName.split('.').pop();
@@ -49,13 +49,13 @@ function onFileInputChange() {
   }
 
   openUploadWindow();
-}
+};
 
-function onUploadCancelButtonClick() {
+const onUploadCancelButtonClick = () => {
   closeUploadWindow();
-}
+};
 
-async function onSubmitForm(evt) {
+const onSubmitForm = async (evt) => {
   evt.preventDefault();
   const isFormValid = pristine.validate();
   if (!isFormValid) {
@@ -74,7 +74,7 @@ async function onSubmitForm(evt) {
     uplodadSubmitButton.disabled = false;
     uplodadSubmitButton.textContent = 'Опубликовать';
   }
-}
+};
 
 function openUploadWindow() {
   uploadOverlayElement.classList.remove('hidden');
@@ -84,7 +84,7 @@ function openUploadWindow() {
   uploadFormElement.addEventListener('submit', onSubmitForm);
 }
 
-function closeUploadWindow() {
+function closeUploadWindow () {
   uploadOverlayElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
@@ -98,10 +98,10 @@ function closeUploadWindow() {
   resetEffect();
 }
 
-function configUploadHandlers() {
+const configUploadHandlers = () => {
   uploadCancelButtonElement.addEventListener('click', onUploadCancelButtonClick);
   uploadFileInputElement.addEventListener('change', onFileInputChange);
-}
+};
 
 
 export { configUploadHandlers };

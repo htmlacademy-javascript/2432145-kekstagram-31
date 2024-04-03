@@ -12,7 +12,18 @@ const commentsLoaderButton = document.querySelector('.comments-loader');
 
 let pictureComments = [];
 
-function openModal(data) {
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeModal();
+  }
+};
+
+const onCommentLoaderClick = () => {
+  renderComments(pictureComments);
+};
+
+const openModal = (data) => {
   modalContainer.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
@@ -25,7 +36,7 @@ function openModal(data) {
   pictureComments = data.comments;
 
   renderComments(data.comments);
-}
+};
 
 function closeModal() {
   modalContainer.classList.add('hidden');
@@ -37,22 +48,11 @@ function closeModal() {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-function onBigPictureCancelButtonClick() {
+const onBigPictureCancelButtonClick = () => {
   closeModal();
-}
+};
 
 modalCancelButton.addEventListener('click', onBigPictureCancelButtonClick);
-
-function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeModal();
-  }
-}
-
-function onCommentLoaderClick() {
-  renderComments(pictureComments);
-}
 
 commentsLoaderButton.addEventListener('click', onCommentLoaderClick);
 
