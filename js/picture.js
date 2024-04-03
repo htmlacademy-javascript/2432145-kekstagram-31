@@ -1,7 +1,7 @@
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureContainer = document.querySelector('.pictures');
 
-function createPicture(data) {
+const createPicture = (data) => {
   const picture = pictureTemplate.cloneNode(true);
   const pictureImg = picture.querySelector('.picture__img');
   pictureImg.src = data.url;
@@ -14,15 +14,15 @@ function createPicture(data) {
   comments.textContent = data.comments.length;
   picture.dataset.id = data.id;
   return picture;
-}
+};
 
-function renderPictures(pictures) {
+const renderPictures = (pictures) => {
   const fragment = document.createDocumentFragment();
   pictures.forEach((item) => {
     const picture = createPicture(item);
     fragment.append(picture);
   });
   pictureContainer.append(fragment);
-}
+};
 
 export {renderPictures};

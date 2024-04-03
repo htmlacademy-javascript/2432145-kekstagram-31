@@ -7,16 +7,16 @@ const commentsLoaderButton = document.querySelector('.comments-loader');
 const commentTotalCount = document.querySelector('.social__comment-total-count');
 const commentShownCount = document.querySelector('.social__comment-shown-count');
 
-function createComment(data) {
+const createComment = (data) => {
   const comment = commentTemplate.cloneNode(true);
   comment.querySelector('.social__picture').src = data.avatar;
   comment.querySelector('.social__picture').alt = data.name;
   comment.querySelector('.social__text').textContent = data.message;
 
   return comment;
-}
+};
 
-function renderComments(comments) {
+const renderComments = (comments) => {
   renderingCommentsCount += COMMETNS_TO_FETCH;
   if (renderingCommentsCount >= comments.length) {
     commentsLoaderButton.classList.add('hidden');
@@ -34,10 +34,10 @@ function renderComments(comments) {
     fragment.append(comment);
   });
   socialCommentsContainer.append(fragment);
-}
+};
 
-function resetCommentsCount() {
+const resetCommentsCount = () => {
   renderingCommentsCount = 0;
-}
+};
 
 export { renderComments, resetCommentsCount };

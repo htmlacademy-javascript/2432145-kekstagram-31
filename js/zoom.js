@@ -8,25 +8,24 @@ const scaleSmallerButton = document.querySelector('.scale__control--smaller');
 const scaleBiggerButton = document.querySelector('.scale__control--bigger');
 const preview = document.querySelector('.img-upload__preview > img');
 
-function applyScale() {
+const applyScale = () => {
   scaleInput.value = `${scale * 100}%`;
   preview.style.transform = `scale(${scale})`;
-}
+};
 
-function onScaleBiggerClick() {
+const onScaleBiggerClick = () => {
   scale = Math.min(scale + SCALE_STEP, MAX_SCALE);
   applyScale();
-}
+};
 
-function onScaleSmallerClick() {
+const onScaleSmallerClick = () => {
   scale = Math.max(scale - SCALE_STEP, MIN_SCALE);
   applyScale();
-}
+};
 
-function resetScale() {
+const resetScale = () => {
   preview.style.transform = '';
-
-}
+};
 
 scaleBiggerButton.addEventListener('click', onScaleBiggerClick);
 scaleSmallerButton.addEventListener('click', onScaleSmallerClick);

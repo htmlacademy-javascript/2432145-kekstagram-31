@@ -1,15 +1,14 @@
-const DEBOUNCE_DELAY = 500;
-
 function isEscapeKey(evt) {
   return evt.key === 'Escape';
 }
 
-function debounce(callback, timeoutDelay = DEBOUNCE_DELAY) {
+function debounce(callback, timeoutDelay = 500) {
   let timeoutId;
-  return function() {
+  return (...rest) => {
     clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback(...arguments), timeoutDelay);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 }
+
 
 export { isEscapeKey, debounce };

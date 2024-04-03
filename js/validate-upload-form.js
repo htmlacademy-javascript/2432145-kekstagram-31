@@ -15,25 +15,23 @@ const pristine = new Pristine(uploadFormElement, {
 }, false
 );
 
-function formatHashtags(value) {
-  return value.trim().split(' ').filter(Boolean);
-}
+const formatHashtags = (value) => value.trim().split(' ').filter(Boolean);
 
-function validateHashtagsCount(value) {
+const validateHashtagsCount = (value) => {
   const hashtags = formatHashtags(value);
   return hashtags.length <= 5;
-}
+};
 
-function validateHashtagsDuplicates(value) {
+const validateHashtagsDuplicates = (value) => {
   const lowerCaseTags = formatHashtags(value).map((tag) => tag.toLowerCase());
   const uniqTags = new Set(lowerCaseTags);
   return uniqTags.size === lowerCaseTags.length;
-}
+};
 
-function validateHashtags(value) {
+const validateHashtags = (value) => {
   const hashtags = formatHashtags(value);
   return hashtags.every((item) => REGEX_HASHTAG.test(item));
-}
+};
 
 
 pristine.addValidator(hashtagsInputElement, validateHashtags, 'Невалидный хештег.', 1, false);

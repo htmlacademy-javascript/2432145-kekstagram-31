@@ -9,7 +9,7 @@ noUiSlider.create(sliderElement, {
   connect: 'lower'
 });
 
-function updateSliderConfig(effect) {
+const updateSliderConfig = (effect) => {
   const config = {
     range: {
       min: effect.min,
@@ -19,6 +19,6 @@ function updateSliderConfig(effect) {
     step: effect.step
   };
   sliderElement.noUiSlider.updateOptions(config);
-}
+};
 
 export { updateSliderConfig, sliderElement };

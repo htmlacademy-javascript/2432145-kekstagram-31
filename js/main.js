@@ -5,7 +5,7 @@ import { showFetchError } from './message.js';
 import './filter.js';
 import { configFilter } from './filter.js';
 
-async function bootstrapApp() {
+const bootstrapApp = async () => {
   configUploadHandlers();
   try {
     const pictures = await fetchPictures();
@@ -14,6 +14,6 @@ async function bootstrapApp() {
   } catch {
     showFetchError();
   }
-}
+};
 
 bootstrapApp();
