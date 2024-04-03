@@ -8,6 +8,7 @@ const FILTER = {
 };
 
 const MAX_PICTURE_COUNT = 10;
+const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 
 const sortFunction = {
   random: () => 0.5 - Math.random(),
@@ -17,7 +18,6 @@ const sortFunction = {
 let currentFilter = FILTER.default;
 let pictures = [];
 const filterElement = document.querySelector('.img-filters');
-const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 
 const debounceRender = debounce(renderBigPhoto);
 
