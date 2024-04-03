@@ -1,7 +1,7 @@
 const REGEX_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 /* регулярное выражение для валидации хештегов- начинается с #(^#), используются символы от A до Z и
   от А до Я с буквой Ё  и арабскими цифрами от 0 до 9([a-zа-яё0-9]), длина от 1 до 20 символов({1,19}), включая #,
-  не учитывает регистр (модификатор i). */
+  не учитывает регистр (модификатор i) */
 const uploadFormElement = document.querySelector('.img-upload__form');
 const hashtagsInputElement = document.querySelector('.text__hashtags');
 
